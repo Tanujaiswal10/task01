@@ -61,9 +61,11 @@ const checkRateLimit = async(userId, ip)=>{
         userRecord.request_count =1
     }
     else{
-        
-    await updateCount(userRecord.id,userRecord.request_count+1)
-    userRecord.request_count +=1;
+        if(userRecord.request_count<USER_LIMIT)
+        {
+            await updateCount(userRecord.id,userRecord.request_count+1) 
+            userRecord.request_count +=1;
+        }
     }
     }
 
